@@ -4,6 +4,7 @@ let inputTitle = document.querySelector("#input-title"),
   cardsArea = document.getElementById("cards-area"),
   editMenu = document.getElementById("edit-menu"),
   menu = document.getElementById("menu");
+//context = document.querySelector(".card__edit");
 let allCards = [];
 
 editMenu.addEventListener("click", editMenuButtons);
@@ -35,17 +36,20 @@ function toggleEditMenu() {
 //
 function renderCards(props) {
   //console.log(props);
-  let htmlBlock = `<div class='card__wrapper'>
-        <div class='card__text'>
-          <div class='card__title'>${props.title}</div>
-          <div class='card__description'>${props.description}</div>
-        </div>
-        <div class='card__down'>
-          <span class='card__priority'>${props.priority}</span>
-          <span class='card__edit'>...</span>
-        </div>
-      </div>`;
+  let htmlBlock = `<article identifier="${props.id}"
+  ${props.isOpened ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
+  <div class='card__text'>
+    <div class='card__title'>${props.title}</div>
+    <div class='card__description'>${props.description}</div>
+  </div>
+  <div class='card__down'>
+    <span class='card__priority'>${props.priority}</span>
+    <span class='card__edit'>...</span>
+  </div>
+</article>`;
   cardsArea.insertAdjacentHTML("afterbegin", htmlBlock);
+  context = document.querySelector(".card__edit");
+  context.addEventListener("click", deleteCard);
 }
 
 function addCard() {
@@ -89,4 +93,23 @@ function restoreDOM() {
   for (let i = 0; i < allCards.length; i++) {
     renderCards(allCards[i]);
   }
+}
+// -----
+function deleteCard(e) {
+  let listIndex = findIndex(retrieveId(e, "article"), allCards);
+
+  allCards[listIndex].deleteInfo(allCards);
+  e.target.closest("article").remove();
+}
+//-------
+
+function retrieveId(e, location) {
+  var taskId = e.target.closest(location).getAttribute("identifier");
+  return taskId;
+}
+
+function findIndex(taskId, globalArray) {
+  return globalArray.findIndex(function(task) {
+    return task.id === parseInt(taskId);
+  });
 }

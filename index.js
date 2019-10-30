@@ -55,8 +55,8 @@ function renderCards(props) {
   </div>
 </article>`;
   cardsArea.insertAdjacentHTML("afterbegin", htmlBlock);
-  context = document.querySelector(".card__edit");
-  //context.addEventListener("click", openExtra);
+  extraDelete = document.querySelector(".extra-menu__delete");
+  extraDelete.addEventListener("click", deleteCard);
 }
 
 function addCard() {

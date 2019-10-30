@@ -44,12 +44,19 @@ function renderCards(props) {
   </div>
   <div class='card__down'>
     <span class='card__priority'>${props.priority}</span>
-    <span class='card__edit'>...</span>
+    <span class='card__edit'>
+      <div class='extra-img'>...</div>
+      <div class='extra-menu'>
+        <button class='extra-menu__edit'>edit</button>
+        <button class='extra-menu__done'>done</button>
+        <button class='extra-menu__delete'>delete</button> 
+          </div>
+    </span>
   </div>
 </article>`;
   cardsArea.insertAdjacentHTML("afterbegin", htmlBlock);
   context = document.querySelector(".card__edit");
-  context.addEventListener("click", deleteCard);
+  //context.addEventListener("click", openExtra);
 }
 
 function addCard() {

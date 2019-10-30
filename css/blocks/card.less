@@ -2,6 +2,7 @@
 
 .card__wrapper {
   border: 3px solid black;
+  position: relative;
   display: inline-block;
   padding: 15px;
   padding-bottom: 30px;
@@ -23,15 +24,35 @@
   max-width: 350px;
 }
 
-.card__priority,
 .card__edit {
+  padding: 0 10px;
+  text-align: center;
+  position: relative;
+}
+
+.card__edit:hover .extra-menu {
+  display: block;
+}
+.card__priority,
+.extra-img {
   border: 3px inset black;
   border-radius: 20px;
   padding: 5px;
 }
-.card__edit {
-  padding: 0 10px;
-  text-align: center;
+
+.extra-menu {
+  position: absolute;
+  display: none;
+  text-align: left;
+}
+.extra-menu > button {
+  width: 50px;
+  background-color: #ccc;
+  outline: none;
+  border: 2px #000 solid;
+}
+.extra-menu > button:hover {
+  background-color: #eee;
 }
 
 .card__down {

@@ -1,0 +1,55 @@
+// main: ../index.less
+
+#edit-menu {
+  border: 3px solid black;
+  width: 200px;
+  padding: 10px 15px;
+  margin: 0 auto;
+  position: absolute;
+  background-color: gray;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 100px;
+  height: 280px;
+}
+
+#edit-menu.hidden {
+  display: none;
+}
+.edit-menu__input {
+  border: 2px solid black;
+  padding: 5px;
+  width: 160px;
+  resize: none;
+}
+.edit-menu__buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.edit-menu__text {
+  font-size: 20px;
+}
+
+.edit-menu__select {
+  color: white;
+}
+.edit-menu__btn {
+  font-size: 20px;
+  border: 3px solid black;
+  border-radius: 15px;
+  background-color: rgb(194, 179, 179);
+  outline: none;
+  cursor: pointer;
+}
+.edit-menu__btn:hover {
+  background-color: black;
+  color: white;
+  transition: background-color 0.3s linear, color 0.3s linear;
+}
+.edit-menu__cancel {
+  font-size: 20px;
+  padding: 4px 5px;
+  cursor: pointer;
+}

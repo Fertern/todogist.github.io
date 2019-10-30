@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css\index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <div class='header'>
+    <div class="header__inner">
+      <span class='header__text'>ToDo</span>
+      <span class='header__logo'>FIST</span>
+    </div>
+    <div class='header__line'></div>
+  </div>
+
+  <!-- Container-center wrapper  -->
+  <div class="container">
+
+    <!-- Search menu -->
+    <div id='menu'>
+      <div class='search__title'>
+        <img src="http://www.clker.com/cliparts/z/w/Q/7/f/C/search-logo-hi.png" alt="" />
+        <input class='search__bar' type="text" size="40" placeholder="search by title..." />
+      </div>
+      <div class="search-priority"></div>
+      <div class="search-status"></div>
+      <button id='button-create' class="create-button">Create</button>
+    </div>
+
+    <!-- 'Create new card' menu -->
+    <div id="edit-menu" class='hidden'>
+      <form>
+        <div class='edit-menu__title'>
+          <div class='edit-menu__text'>Title:</div>
+          <input id="input-title" class='edit-menu__input' type="text" size="20" placeholder="Your title.." />
+        </div>
+        <div class='edit-menu__description'>
+          <div class='edit-menu__text'>Description:</div>
+          <textarea id="input-description" class='edit-menu__input' type="text" size="20"
+            placeholder="Your description.."></textarea>
+        </div>
+        <div class='edit-menu__priority'>
+          <div class='edit-menu__text'>Priority:</div>
+          <div class='edit-menu__menu'>
+            <div class='edit-menu__content'></div>
+          </div>
+        </div>
+        <select id="input-priority" class='edit-menu__select'>
+          <option priority="High">High</option>
+          <option priority="Normal">Normal</option>
+          <option priority="Low">Low</option>
+        </select>
+        <div class='edit-menu__buttons'>
+          <button id='button-save' type="submit" class='edit-menu__btn' value="Save">Save</button>
+          <button id='button-cancel' class='edit-menu__btn edit-menu_cancel'>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Space for task-cards -->
+    <div id="cards-area">
+      <!-- <div class='card__wrapper'>
+        <div class='card__text'>
+          <div class='card__title'>'props.title'</div>
+          <div class='card__description'>'props.description'</div>
+        </div>
+        <div class='card__down'>
+          <span class='card__priority'>'props.priority'</span>
+          <span class='card__edit'>...</span>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+  <!-- Footer -->
+  <div class="footer">
+    <div class='footer__line'></div>
+    <div class='footer__text'>by Fertern in 2019</div>
+  </div>
+
+</body>
+<script type="text/javascript" src="card.js"></script>
+<script type="text/javascript" src="index.js"></script>
+
+</html>

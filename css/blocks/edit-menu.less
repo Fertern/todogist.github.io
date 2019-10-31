@@ -33,9 +33,6 @@
   font-size: 20px;
 }
 
-.edit-menu__select {
-  color: white;
-}
 .edit-menu__btn {
   font-size: 20px;
   border: 3px solid black;
@@ -53,4 +50,56 @@
   font-size: 20px;
   padding: 4px 5px;
   cursor: pointer;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #ccc;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 170px;
+  height: 30px;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+select {
+  font-size: 15px;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #000;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 15px;
+  vertical-align: top;
+  background: #555;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #ddd;
 }

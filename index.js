@@ -36,7 +36,7 @@ function toggleEditMenu() {
 //
 function renderCards(props) {
   //console.log(props);
-  let htmlBlock = `<article identifier="${props.id}"
+  let htmlBlock = `<article identifier="${props.id}" id='${"f" + props.id}'
   ${props.isOpened ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
   <div class='card__text'>
     <div class='card__title'>${props.title}</div>
@@ -55,8 +55,29 @@ function renderCards(props) {
   </div>
 </article>`;
   cardsArea.insertAdjacentHTML("afterbegin", htmlBlock);
+  extraEdit = document.querySelector(".extra-menu__edit");
+  extraDone = document.querySelector(".extra-menu__done");
   extraDelete = document.querySelector(".extra-menu__delete");
+  extraEdit.addEventListener("click", deleteCard);
+  extraDone.addEventListener("click", doneCard);
   extraDelete.addEventListener("click", deleteCard);
+}
+
+function doneCard(e) {
+  let listIndex = findIndex(retrieveId(e, "article"), allCards);
+  let itId = "#" + "f" + allCards[listIndex].id;
+  itCard = document.querySelector(itId);
+  itCard.classList.add("open");
+
+  allCards[listIndex].isOpened = true;
+
+  // done/undone ->
+  // if (allCards[listIndex].isOpened) {
+  //   allCards[listIndex].isOpened = false;
+  // } else {
+  //   allCards[listIndex].isOpened = true;
+  // }
+  allCards[listIndex].saveInfo(allCards);
 }
 
 function addCard() {
@@ -66,7 +87,7 @@ function addCard() {
     description: inputDescription.value,
     priority: inputPriority.value
   });
-  console.log(inputTitle.value);
+  //console.log(inputTitle.value);
   allCards.push(newCard);
   renderCards(newCard);
   newCard.saveInfo(allCards);

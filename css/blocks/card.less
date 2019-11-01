@@ -34,7 +34,8 @@
   display: block;
 }
 .card__priority,
-.extra-img {
+.extra-img,
+.ok {
   border: 3px inset black;
   border-radius: 20px;
   padding: 5px;
@@ -59,4 +60,18 @@
 .card__down {
   display: flex;
   justify-content: space-between;
+}
+
+.card__title.hide,
+.card__description.hide,
+.card__priority.hide,
+.card__edit.hide,
+.edited-title.hide,
+.edited-description.hide,
+.edited-priority.hide,
+.ok {
+  display: none;
+}
+.ok.hide {
+  display: block;
 }

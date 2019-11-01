@@ -9,6 +9,7 @@ let allCards = [];
 
 editMenu.addEventListener("click", editMenuButtons);
 menu.addEventListener("click", menuButtons);
+window.addEventListener("DOMContentLoaded", handlePageLoad);
 
 function editMenuButtons(e) {
   e.preventDefault();
@@ -39,12 +40,30 @@ function renderCards(props) {
   let htmlBlock = `<article identifier="${props.id}" id='${"f" + props.id}'
   ${props.isOpened ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
   <div class='card__text'>
-    <div class='card__title'>${props.title}</div>
-    <div class='card__description'>${props.description}</div>
+    <div id='${"card__title" + props.id}' class='card__title'>${
+    props.title
+  }</div>
+    <input type="text" id="${"edited-title" +
+      props.id}" class='edited-title hide'/>
+    <div id='${"card__description" + props.id}' class='card__description'>${
+    props.description
+  }</div>
+    <input type="text" 
+    id="${"edited-description" + props.id}" class='edited-description hide'/>
   </div>
   <div class='card__down'>
-    <span class='card__priority'>${props.priority}</span>
-    <span class='card__edit'>
+    <span id='${"card__priority" + props.id}' class='card__priority'>${
+    props.priority
+  }</span>
+    <div class="edit-select">
+      <select id='${"edited-priority" +
+        props.id}' class="edited-priority hide" >
+        <option selected value="High">High</option>
+        <option value="Normal">Normal</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+    <span id='${"card__edit" + props.id}'  class='card__edit'>
       <div class='extra-img'>...</div>
       <div class='extra-menu'>
         <button class='extra-menu__edit'>edit</button>
@@ -52,15 +71,82 @@ function renderCards(props) {
         <button class='extra-menu__delete'>delete</button> 
           </div>
     </span>
+    <span id='${"ok" + props.id}' class='ok'>OK</span>
   </div>
 </article>`;
   cardsArea.insertAdjacentHTML("afterbegin", htmlBlock);
+  // --extra suka
   extraEdit = document.querySelector(".extra-menu__edit");
   extraDone = document.querySelector(".extra-menu__done");
   extraDelete = document.querySelector(".extra-menu__delete");
-  extraEdit.addEventListener("click", deleteCard);
+  // --Def suka
+  // --
+  extraEdit.addEventListener("click", editCard);
   extraDone.addEventListener("click", doneCard);
   extraDelete.addEventListener("click", deleteCard);
+}
+
+function editCard(e) {
+  let listIndex = findIndex(retrieveId(e, "article"), allCards),
+    id = allCards[listIndex].id,
+    // -- Card as usual
+    idTitleDef = "#" + "card__title" + id,
+    idDescriptionDef = "#" + "card__description" + id,
+    idPriorityDef = "#" + "card__priority" + id,
+    idDots = "#" + "card__edit" + id,
+    // -- Card as editing
+    idTitle = "#" + "edited-title" + id,
+    idDescription = "#" + "edited-description" + id,
+    idPriority = "#" + "edited-priority" + id,
+    idOk = "#" + "ok" + id,
+    // --
+    editedTitle = document.querySelector(idTitle),
+    editedDescription = document.querySelector(idDescription),
+    editedPriority = document.querySelector(idPriority),
+    // --
+    defTitle = document.querySelector(idTitleDef),
+    defDescription = document.querySelector(idDescriptionDef),
+    defPriority = document.querySelector(idPriorityDef),
+    // --
+    dots = document.querySelector(idDots),
+    ok = document.querySelector(idOk);
+  // --
+  ok.addEventListener("click", saveOk);
+  editedTitle.classList.toggle("hide");
+  editedDescription.classList.toggle("hide");
+  editedPriority.classList.toggle("hide");
+  // --
+  defTitle.classList.toggle("hide");
+  defDescription.classList.toggle("hide");
+  defPriority.classList.toggle("hide");
+  // --
+  dots.classList.toggle("hide");
+  ok.classList.toggle("hide");
+  // --
+  let arr = [
+    defTitle,
+    editedTitle,
+    defDescription,
+    editedDescription,
+    defPriority,
+    editedPriority,
+    id,
+    listIndex
+  ];
+  return arr;
+}
+function saveOk(e) {
+  let info = editCard(e);
+  console.log(info[0].value);
+  info[0].innerHTML = info[1].value;
+  info[2].innerHTML = info[3].value;
+  info[4].innerHTML = info[5].value;
+  let itCard = allCards.find(item => item.id === info[6]);
+  itCard.title = info[1].value;
+  itCard.description = info[3].value;
+  itCard.priority = info[5].value;
+  console.log(allCards);
+  allCards[info[7]].saveInfo(allCards);
 }
 
 function doneCard(e) {
@@ -106,7 +192,7 @@ function handlePageLoad() {
 function restoreData() {
   let recoveredData = JSON.parse(localStorage.getItem("globalStorage")).map(
     function(info) {
-      return new ToDoList({
+      return new Card({
         id: info.id,
         title: info.title,
         description: info.description,

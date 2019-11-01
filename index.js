@@ -3,13 +3,16 @@ let inputTitle = document.querySelector("#input-title"),
   inputPriority = document.querySelector("#input-priority"),
   cardsArea = document.getElementById("cards-area"),
   editMenu = document.getElementById("edit-menu"),
-  menu = document.getElementById("menu");
+  menu = document.getElementById("menu"),
+  searchTitle = document.getElementById("search-title"),
+  inputSearch = document.querySelector(".search-title__bar");
 //context = document.querySelector(".card__edit");
 let allCards = [];
 
 editMenu.addEventListener("click", editMenuButtons);
 menu.addEventListener("click", menuButtons);
 window.addEventListener("DOMContentLoaded", handlePageLoad);
+searchTitle.addEventListener("input", searchByTitle);
 
 function editMenuButtons(e) {
   e.preventDefault();
@@ -25,10 +28,22 @@ function menuButtons(e) {
   e.preventDefault();
   if (e.target.id === "button-create") {
     toggleEditMenu();
-  }
+  } /* else if (e.target.id === "search-title") {
+    searchByTitle(); 
+  } */
 }
 
 // simple shit
+
+function searchByTitle() {
+  let searchCards = allCards.filter(item =>
+    item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
+  );
+  cardsArea.innerHTML = "";
+  for (let i = 0; i < searchCards.length; i++) {
+    renderCards(searchCards[i]);
+  }
+}
 
 function toggleEditMenu() {
   editMenu.classList.toggle("hidden");

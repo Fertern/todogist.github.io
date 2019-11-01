@@ -23,11 +23,25 @@
 
     <!-- Search menu -->
     <div id='menu'>
-      <div class='search__title'>
+      <div id='search-title'>
         <img src="http://www.clker.com/cliparts/z/w/Q/7/f/C/search-logo-hi.png" alt="" />
-        <input class='search__bar' type="text" size="40" placeholder="search by title..." />
+        <input class='search-title__bar' type="text" size="40" placeholder="search by title..." />
       </div>
-      <div class="search-priority"></div>
+      <div class="select">
+        <select id='search-status'>
+          <option selected>all</option>
+          <option value="open">open</option>
+          <option value="done">done</option>
+        </select>
+      </div>
+      <div class="select">
+        <select id="search-priority">
+          <option selected>all</option>
+          <option value="High">high</option>
+          <option value="Normal">normal</option>
+          <option value="Low">low</option>
+        </select>
+      </div>
       <div class="search-status"></div>
       <button id='button-create' class="create-button">Create</button>
     </div>

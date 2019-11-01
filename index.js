@@ -43,12 +43,12 @@ function renderCards(props) {
     <div id='${"card__title" + props.id}' class='card__title'>${
     props.title
   }</div>
-    <input type="text" id="${"edited-title" +
-      props.id}" class='edited-title hide'/>
+    <input value='${props.title}' type="text" id="${"edited-title" +
+    props.id}" class='edited-title hide'/>
     <div id='${"card__description" + props.id}' class='card__description'>${
     props.description
   }</div>
-    <input type="text" 
+    <input value='${props.description}' type="text" 
     id="${"edited-description" + props.id}" class='edited-description hide'/>
   </div>
   <div class='card__down'>
@@ -80,6 +80,19 @@ function renderCards(props) {
   extraDone = document.querySelector(".extra-menu__done");
   extraDelete = document.querySelector(".extra-menu__delete");
   // --Def suka
+
+  /* let listIndex = findIndex(retrieveId(e, "article"), allCards),
+    id = allCards[listIndex].id,
+    idTitleDef = "#" + "card__title" + id,
+    idDescriptionDef = "#" + "card__description" + id,
+    idTitle = "#" + "edited-title" + id,
+    idDescription = "#" + "edited-description" + id,
+    defTitle = document.querySelector(idTitleDef),
+    defDescription = document.querySelector(idDescriptionDef),
+    editedTitle = document.querySelector(idTitle),
+    editedDescription = document.querySelector(idDescription);
+  editedTitle.value = defTitle.innerHTML;
+  editedDescription.value = defDescription.innerHTML; */
   // --
   extraEdit.addEventListener("click", editCard);
   extraDone.addEventListener("click", doneCard);

@@ -150,20 +150,22 @@ function saveOk(e) {
 }
 
 function doneCard(e) {
-  let listIndex = findIndex(retrieveId(e, "article"), allCards);
-  let itId = "#" + "f" + allCards[listIndex].id;
-  itCard = document.querySelector(itId);
-  itCard.classList.add("open");
+  let listIndex = findIndex(retrieveId(e, "article"), allCards),
+    itId = "#" + "f" + allCards[listIndex].id,
+    itCard = document.querySelector(itId),
+    itCardInArray = allCards.find(item => item.id === allCards[listIndex].id);
+  itCard.classList.toggle("open");
 
-  allCards[listIndex].isOpened = true;
-
-  // done/undone ->
-  // if (allCards[listIndex].isOpened) {
-  //   allCards[listIndex].isOpened = false;
-  // } else {
-  //   allCards[listIndex].isOpened = true;
-  // }
+  //allCards[listIndex].isOpened = true;
+  //done/undone ->
+  if (itCardInArray.isOpened) {
+    itCardInArray.isOpened = false;
+  } else {
+    itCardInArray.isOpened = true;
+  }
+  //console.log(localStorage.getItem("globalStorage"));
   allCards[listIndex].saveInfo(allCards);
+  //console.log(localStorage.getItem("globalStorage"));
 }
 
 function addCard() {
@@ -186,6 +188,8 @@ function handlePageLoad() {
   if (JSON.parse(localStorage.getItem("globalStorage"))) {
     restoreData();
     restoreDOM();
+    console.log(JSON.parse(localStorage.getItem("globalStorage")));
+    console.log(allCards);
   }
 }
 

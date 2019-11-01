@@ -4,7 +4,7 @@ class Card {
     this.title = info.title;
     this.description = info.description;
     this.priority = info.priority;
-    this.isOpened = false;
+    this.isOpened = info.isOpened;
   }
   saveInfo(allCards) {
     localStorage.setItem("globalStorage", JSON.stringify(allCards));

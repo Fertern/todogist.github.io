@@ -1,3 +1,4 @@
+// Global elements
 let inputTitle = document.querySelector("#input-title"),
   inputDescription = document.querySelector("#input-description"),
   inputPriority = document.querySelector("#input-priority"),
@@ -8,9 +9,11 @@ let inputTitle = document.querySelector("#input-title"),
   inputSearch = document.querySelector(".search-title__bar"),
   searchStatus = document.getElementById("search-status"),
   searchPriority = document.getElementById("search-priority");
-//context = document.querySelector(".card__edit");
+
+// Array for all cards
 let allCards = [];
 
+// Global events
 editMenu.addEventListener("click", editMenuButtons);
 menu.addEventListener("click", menuButtons);
 window.addEventListener("DOMContentLoaded", handlePageLoad);
@@ -18,6 +21,9 @@ searchTitle.addEventListener("input", searchAll);
 searchStatus.addEventListener("change", searchAll);
 searchPriority.addEventListener("change", searchAll);
 
+/* Functions */
+
+// For events
 function editMenuButtons(e) {
   e.preventDefault();
   if (e.target.id === "button-save") {
@@ -32,37 +38,25 @@ function menuButtons(e) {
   e.preventDefault();
   if (e.target.id === "button-create") {
     toggleEditMenu();
-  } /* else if (e.target.id === "search-title") {
-    searchByTitle(); 
-  } */
+  }
 }
 
-// simple shit
+function toggleEditMenu() {
+  editMenu.classList.toggle("hidden");
+}
 
-// function searchByStatus() {
-//   let difCards;
-//   if (searchStatus.value === "all") {
-//     cardsArea.innerHTML = "";
-//     for (let i = 0; i < allCards.length; i++) {
-//       renderCards(allCards[i]);
-//     }
-//   } else if (searchStatus.value === "done") {
-//     difCards = allCards.filter(item => item.isOpened == true);
-//     cardsArea.innerHTML = "";
-//     for (let i = 0; i < difCards.length; i++) {
-//       renderCards(difCards[i]);
-//     }
-//   } else {
-//     difCards = allCards.filter(
-//       item => item.isOpened == false || item.isOpened == null
-//     );
-//     cardsArea.innerHTML = "";
-//     for (let i = 0; i < difCards.length; i++) {
-//       renderCards(difCards[i]);
-//     }
-//   }
-// }
+// For search current card in array
+function retrieveId(e, location) {
+  var taskId = e.target.closest(location).getAttribute("identifier");
+  return taskId;
+}
+function findIndex(taskId, globalArray) {
+  return globalArray.findIndex(function(task) {
+    return task.id === parseInt(taskId);
+  });
+}
 
+// For search cards
 function searchAll() {
   let searchCards,
     status = searchStatus.value,
@@ -79,23 +73,22 @@ function searchAll() {
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
     );
   } else if (status === "open" && priority !== "all") {
-    statusCards = allCards.filter(item => item.isOpened === false);
+    statusCards = allCards.filter(item => item.isDone === false);
     priorityCards = statusCards.filter(item => item.priority === priority);
     searchCards = priorityCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
     );
-    console.log("selectim work");
   } else if (status === "done" && priority !== "all") {
-    statusCards = allCards.filter(item => item.isOpened === true);
+    statusCards = allCards.filter(item => item.isDone === true);
     priorityCards = statusCards.filter(item => item.priority === priority);
     searchCards = priorityCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
     );
   } else {
     if (status === "open") {
-      statusCards = allCards.filter(item => item.isOpened === false);
+      statusCards = allCards.filter(item => item.isDone === false);
     } else {
-      statusCards = allCards.filter(item => item.isOpened === true);
+      statusCards = allCards.filter(item => item.isDone === true);
     }
     searchCards = statusCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
@@ -107,44 +100,26 @@ function searchAll() {
   }
 }
 
-function searchByTitle() {
-  let searchCards = allCards.filter(item =>
-    item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
-  );
-  cardsArea.innerHTML = "";
-  for (let i = 0; i < searchCards.length; i++) {
-    renderCards(searchCards[i]);
-  }
-}
-
-function toggleEditMenu() {
-  editMenu.classList.toggle("hidden");
-}
-
-//
+// For display cards in DOM
 function renderCards(props) {
-  //console.log(props);
   let htmlBlock = `<article identifier="${props.id}" id='${"f" + props.id}'
-  ${props.isOpened ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
+  ${props.isDone ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
   <div class='card__text'>
-    <div id='${"card__title" + props.id}' class='card__title'>${
-    props.title
-  }</div>
-    <input value='${props.title}' type="text" id="${"edited-title" +
-    props.id}" class='edited-title hide'/>
-    <div id='${"card__description" + props.id}' class='card__description'>${
-    props.description
-  }</div>
+    <div id='${"card__title" + props.id}' class='card__title'>
+    ${props.title}</div>
+    <input value='${props.title}' type="text" 
+    id="${"edited-title" + props.id}" class='edited-title hide'/>
+    <div id='${"card__description" + props.id}' class='card__description'>
+    ${props.description}</div>
     <input value='${props.description}' type="text" 
     id="${"edited-description" + props.id}" class='edited-description hide'/>
   </div>
   <div class='card__down'>
-    <span id='${"card__priority" + props.id}' class='card__priority'>${
-    props.priority
-  }</span>
+    <span id='${"card__priority" + props.id}' class='card__priority'>
+    ${props.priority}</span>
     <div class="edit-select">
-      <select id='${"edited-priority" +
-        props.id}' class="edited-priority hide" >
+      <select id='${"edited-priority" + props.id}' 
+        class="edited-priority hide" >
         <option selected value="High">High</option>
         <option value="Normal">Normal</option>
         <option value="Low">Low</option>
@@ -162,39 +137,41 @@ function renderCards(props) {
   </div>
 </article>`;
   cardsArea.insertAdjacentHTML("afterbegin", htmlBlock);
-  // --extra suka
+  // Elements of extra-menu
   extraEdit = document.querySelector(".extra-menu__edit");
   extraDone = document.querySelector(".extra-menu__done");
   extraDelete = document.querySelector(".extra-menu__delete");
-  // --Def suka
-
-  /* let listIndex = findIndex(retrieveId(e, "article"), allCards),
-    id = allCards[listIndex].id,
-    idTitleDef = "#" + "card__title" + id,
-    idDescriptionDef = "#" + "card__description" + id,
-    idTitle = "#" + "edited-title" + id,
-    idDescription = "#" + "edited-description" + id,
-    defTitle = document.querySelector(idTitleDef),
-    defDescription = document.querySelector(idDescriptionDef),
-    editedTitle = document.querySelector(idTitle),
-    editedDescription = document.querySelector(idDescription);
-  editedTitle.value = defTitle.innerHTML;
-  editedDescription.value = defDescription.innerHTML; */
-  // --
+  // Events for extra-menu
   extraEdit.addEventListener("click", editCard);
   extraDone.addEventListener("click", doneCard);
   extraDelete.addEventListener("click", deleteCard);
 }
 
+/* Interactions with cards */
+function addCard() {
+  let newCard = new Card({
+    id: allCards.length,
+    title: inputTitle.value,
+    description: inputDescription.value,
+    priority: inputPriority.value,
+    isDone: false
+  });
+  allCards.push(newCard);
+  renderCards(newCard);
+  newCard.saveInfo(allCards);
+  inputTitle.value = "";
+  inputDescription.value = "";
+}
+
 function editCard(e) {
   let listIndex = findIndex(retrieveId(e, "article"), allCards),
     id = allCards[listIndex].id,
-    // -- Card as usual
+    // Set unique ID for every single card
     idTitleDef = "#" + "card__title" + id,
     idDescriptionDef = "#" + "card__description" + id,
     idPriorityDef = "#" + "card__priority" + id,
     idDots = "#" + "card__edit" + id,
-    // -- Card as editing
+    // --
     idTitle = "#" + "edited-title" + id,
     idDescription = "#" + "edited-description" + id,
     idPriority = "#" + "edited-priority" + id,
@@ -210,8 +187,8 @@ function editCard(e) {
     // --
     dots = document.querySelector(idDots),
     ok = document.querySelector(idOk);
-  // --
   ok.addEventListener("click", saveOk);
+  // Swap between 'default' and 'editing'
   editedTitle.classList.toggle("hide");
   editedDescription.classList.toggle("hide");
   editedPriority.classList.toggle("hide");
@@ -222,7 +199,7 @@ function editCard(e) {
   // --
   dots.classList.toggle("hide");
   ok.classList.toggle("hide");
-  // --
+  // Export variables for using in another function
   let arr = [
     defTitle,
     editedTitle,
@@ -235,9 +212,10 @@ function editCard(e) {
   ];
   return arr;
 }
+
 function saveOk(e) {
+  // Use array of variables from last function
   let info = editCard(e);
-  console.log(info[0].value);
   info[0].innerHTML = info[1].value;
   info[2].innerHTML = info[3].value;
   info[4].innerHTML = info[5].value;
@@ -245,52 +223,36 @@ function saveOk(e) {
   itCard.title = info[1].value;
   itCard.description = info[3].value;
   itCard.priority = info[5].value;
-  console.log(allCards);
-  allCards[info[7]].saveInfo(allCards);
+  allCards[info[7]].saveInfo(allCards); // save changes into localStorage
 }
 
 function doneCard(e) {
   let listIndex = findIndex(retrieveId(e, "article"), allCards),
+    // Set unique ID for card
     itId = "#" + "f" + allCards[listIndex].id,
     itCard = document.querySelector(itId),
     itCardInArray = allCards.find(item => item.id === allCards[listIndex].id);
   itCard.classList.toggle("open");
-
-  //allCards[listIndex].isOpened = true;
-  //done/undone ->
-  if (itCardInArray.isOpened) {
-    itCardInArray.isOpened = false;
+  if (itCardInArray.isDone) {
+    itCardInArray.isDone = false;
   } else {
-    itCardInArray.isOpened = true;
+    itCardInArray.isDone = true;
   }
-  //console.log(localStorage.getItem("globalStorage"));
-  allCards[listIndex].saveInfo(allCards);
-  //console.log(localStorage.getItem("globalStorage"));
+  allCards[listIndex].saveInfo(allCards); // save into localStorage
 }
 
-function addCard() {
-  let newCard = new Card({
-    id: allCards.length,
-    title: inputTitle.value,
-    description: inputDescription.value,
-    priority: inputPriority.value,
-    isOpened: false
-  });
-  //console.log(inputTitle.value);
-  allCards.push(newCard);
-  renderCards(newCard);
-  newCard.saveInfo(allCards);
-  inputTitle.value = "";
-  inputDescription.value = "";
+function deleteCard(e) {
+  let listIndex = findIndex(retrieveId(e, "article"), allCards);
+
+  allCards[listIndex].deleteInfo(allCards);
+  e.target.closest("article").remove();
 }
 
-// FUNCTIONS
+// Functions for using localStorage
 function handlePageLoad() {
   if (JSON.parse(localStorage.getItem("globalStorage"))) {
     restoreData();
     restoreDOM();
-    console.log(JSON.parse(localStorage.getItem("globalStorage")));
-    console.log(allCards);
   }
 }
 
@@ -302,33 +264,16 @@ function restoreData() {
         title: info.title,
         description: info.description,
         priority: info.priority,
-        isOpened: info.isOpened
+        isDone: info.isDone
       });
     }
   );
   allCards = recoveredData;
 }
+
 function restoreDOM() {
   for (let i = 0; i < allCards.length; i++) {
     renderCards(allCards[i]);
   }
 }
-// -----
-function deleteCard(e) {
-  let listIndex = findIndex(retrieveId(e, "article"), allCards);
-
-  allCards[listIndex].deleteInfo(allCards);
-  e.target.closest("article").remove();
-}
-//-------
-
-function retrieveId(e, location) {
-  var taskId = e.target.closest(location).getAttribute("identifier");
-  return taskId;
-}
-
-function findIndex(taskId, globalArray) {
-  return globalArray.findIndex(function(task) {
-    return task.id === parseInt(taskId);
-  });
-}
+// End. Thanks for review :3

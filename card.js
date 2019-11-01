@@ -4,7 +4,7 @@ class Card {
     this.title = info.title;
     this.description = info.description;
     this.priority = info.priority;
-    this.isOpened = info.isOpened;
+    this.isDone = info.isDone;
   }
   saveInfo(allCards) {
     localStorage.setItem("globalStorage", JSON.stringify(allCards));
@@ -15,10 +15,6 @@ class Card {
       return parseInt(list.id) === listId;
     });
     allCards.splice(index, 1);
-    this.saveInfo(allCards);
-  }
-  checkCard(allCards) {
-    this.isOpened = !this.isOpened;
     this.saveInfo(allCards);
   }
 }

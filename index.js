@@ -28,9 +28,11 @@ function editMenuButtons(e) {
   e.preventDefault();
   if (e.target.id === "button-save") {
     addCard(e);
-    toggleEditMenu();
   } else if (e.target.id === "button-cancel") {
     toggleEditMenu();
+  } else if (e.target.id === "input-title") {
+    inputTitle.setAttribute("placeholder", "Your title..");
+    inputTitle.classList.remove("alert");
   }
 }
 
@@ -42,18 +44,18 @@ function menuButtons(e) {
 }
 
 function toggleEditMenu() {
+  inputTitle.setAttribute("placeholder", "Your title..");
+  inputTitle.classList.remove("alert");
   editMenu.classList.toggle("hidden");
 }
 
 // For search current card in array
 function retrieveId(e, location) {
-  var taskId = e.target.closest(location).getAttribute("identifier");
+  var taskId = e.target.closest(location).getAttribute("id");
   return taskId;
 }
 function findIndex(taskId, globalArray) {
-  return globalArray.findIndex(function(task) {
-    return task.id === parseInt(taskId);
-  });
+  return globalArray.findIndex(item => item.id === taskId);
 }
 
 // For search cards
@@ -102,7 +104,7 @@ function searchAll() {
 
 // For display cards in DOM
 function renderCards(props) {
-  let htmlBlock = `<article identifier="${props.id}" id='${"f" + props.id}'
+  let htmlBlock = `<article id='${props.id}'
   ${props.isDone ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
   <div class='card__text'>
     <div id='${"card__title" + props.id}' class='card__title'>
@@ -149,18 +151,25 @@ function renderCards(props) {
 
 /* Interactions with cards */
 function addCard() {
-  let newCard = new Card({
-    id: allCards.length,
-    title: inputTitle.value,
-    description: inputDescription.value,
-    priority: inputPriority.value,
-    isDone: false
-  });
-  allCards.push(newCard);
-  renderCards(newCard);
-  newCard.saveInfo(allCards);
-  inputTitle.value = "";
-  inputDescription.value = "";
+  if (!inputTitle.value) {
+    inputTitle.setAttribute("placeholder", "Card must have a title!");
+    inputTitle.classList.add("alert");
+  } else {
+    let newCard = new Card({
+      id: `f${(~~(Math.random() * 1e5)).toString()}`,
+      title: inputTitle.value,
+      description: inputDescription.value,
+      priority: inputPriority.value,
+      isDone: false
+    });
+    allCards.push(newCard);
+    renderCards(newCard);
+    newCard.saveInfo(allCards);
+    inputTitle.value = "";
+    inputDescription.value = "";
+    inputTitle.classList.remove("alert");
+    toggleEditMenu();
+  }
 }
 
 function editCard(e) {
@@ -227,9 +236,9 @@ function saveOk(e) {
 }
 
 function doneCard(e) {
-  let listIndex = findIndex(retrieveId(e, "article"), allCards),
-    // Set unique ID for card
-    itId = "#" + "f" + allCards[listIndex].id,
+  let listIndex = findIndex(retrieveId(e, "article"), allCards);
+  // Set unique ID for card
+  let itId = "#" + allCards[listIndex].id,
     itCard = document.querySelector(itId),
     itCardInArray = allCards.find(item => item.id === allCards[listIndex].id);
   itCard.classList.toggle("open");
@@ -243,7 +252,7 @@ function doneCard(e) {
 
 function deleteCard(e) {
   let listIndex = findIndex(retrieveId(e, "article"), allCards);
-
+  console.log(allCards.findIndex(item => item.id === "f77"));
   allCards[listIndex].deleteInfo(allCards);
   e.target.closest("article").remove();
 }

@@ -18,6 +18,6 @@
 
 # by Fertern in 2019
 
-#### ferternever@gmail.com
+#### Email: ferternever@gmail.com
 
 #### Telegram: @fertern

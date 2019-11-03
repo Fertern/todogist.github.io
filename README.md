@@ -14,6 +14,10 @@
 
 ### Also, all progress saved into localStorage, so cards still
 
-### exist after reloading the page or browser
+### exist after reloading the page or browser.
 
 # by Fertern in 2019
+
+#### ferternever@gmail.com
+
+#### Telegram: @fertern

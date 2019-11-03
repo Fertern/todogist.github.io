@@ -4,18 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css\index.css">
+  <link rel="stylesheet" href="css/index.css">
   <title>todo GIST</title>
 </head>
 
 <body>
   <!-- Header -->
   <div class='header'>
-    <div class="header__inner">
       <span class='header__text'>ToDo</span>
       <span class='header__logo'>GIST</span>
-    </div>
-    <div class='header__line'></div>
   </div>
 
   <!-- Container-center wrapper  -->
@@ -29,20 +26,19 @@
       </div>
       <div class="select">
         <select id='search-status'>
-          <option selected>all</option>
-          <option value="open">open</option>
-          <option value="done">done</option>
+          <option selected>All</option>
+          <option value="open">Open</option>
+          <option value="done">Done</option>
         </select>
       </div>
       <div class="select">
         <select id="search-priority">
-          <option selected>all</option>
-          <option value="High">high</option>
-          <option value="Normal">normal</option>
-          <option value="Low">low</option>
+          <option selected>All</option>
+          <option value="High">High</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
         </select>
       </div>
-      <div class="search-status"></div>
       <button id='button-create' class="create-button">Create</button>
     </div>
 
@@ -52,11 +48,11 @@
       <form>
         <div class='edit-menu__title'>
           <div class='edit-menu__text'>Title:</div>
-          <input id="input-title" class='edit-menu__input' type="text" size="20" placeholder="Your title.." />
+          <input id="input-title" maxlength="30" class='edit-menu__input' type="text" size="20" placeholder="Your title.." />
         </div>
         <div class='edit-menu__description'>
           <div class='edit-menu__text'>Description:</div>
-          <textarea id="input-description" class='edit-menu__input' type="text" size="20"
+          <textarea id="input-description" maxlength="150" class='edit-menu__input' type="text" size="20"
             placeholder="Your description.."></textarea>
         </div>
         <div class='edit-menu__priority'>

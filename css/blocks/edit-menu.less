@@ -1,18 +1,41 @@
 // main: ../index.less
-
-#edit-menu {
-  border: 3px solid black;
-  width: 200px;
-  padding: 10px 15px;
-  margin: 0 auto;
+#edit-menu{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1002;
+  font-size: 3vw;
+}
+#edit-menu:focus{
+  display: none;
+}
+#edit-menu>form {
+  border: 0.1vw solid black;
+  width: 20vw;
+  height: 30vw;
+  padding: 1vw;
   position: absolute;
-  background-color: gray;
+  text-align: center;
+  background-color: #eee;
   left: 0;
   right: 0;
   bottom: 0;
-  top: 100px;
-  height: 280px;
-  z-index: 69;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+#edit-menu>.select{
+  font-size: 1.5vw;
+}
+#edit-menu.hidden {
+  display: none;
+}
+#edit-menu>form>*{
+  width: 18vw;
+  margin: 0.5vw 0;
 }
 
 #input-title.alert {
@@ -21,30 +44,28 @@
 #input-title.alert::placeholder {
   color: rgb(255, 0, 0);
 }
-
-#edit-menu.hidden {
-  display: none;
+#menu> .select,#edit-menu>form>.select{
+  border: 0.1vw #000 solid;
 }
 .edit-menu__input {
-  border: 2px solid black;
-  padding: 5px;
-  width: 160px;
+  border: 0.1vw solid black;
+  padding: 0.25vw;
+  width: 18vw;
   resize: none;
 }
 .edit-menu__buttons {
-  margin-top: 10px;
+  position: absolute;
+  bottom: 1vw;
+  margin: 0!important;
   display: flex;
   justify-content: space-between;
 }
-.edit-menu__text {
-  font-size: 20px;
-}
 
 .edit-menu__btn {
-  font-size: 20px;
-  border: 3px solid black;
-  border-radius: 15px;
-  background-color: rgb(194, 179, 179);
+  border: 0.1vw solid black;
+  border-radius: 1vw;
+  height: 3vw;
+  background-color: #ccc;
   outline: none;
   cursor: pointer;
 }
@@ -54,8 +75,7 @@
   transition: background-color 0.3s linear, color 0.3s linear;
 }
 .edit-menu__cancel {
-  font-size: 20px;
-  padding: 4px 5px;
+  padding: 0.2vw 0.25vw;
   cursor: pointer;
 }
 select {
@@ -67,25 +87,22 @@ select {
   box-shadow: none;
   border: 0 !important;
   background: #ccc;
-  background-image: none;
 }
-/* Remove IE arrow */
 select::-ms-expand {
   display: none;
 }
-/* Custom Select */
 .select {
   position: relative;
   display: flex;
-  width: 170px;
-  height: 30px;
+  width: 8vw;
+  height: 1.5vw;
   line-height: 3;
-  background: #2c3e50;
+  background: #ccc;
   overflow: hidden;
   border-radius: 0.25em;
+  height: 2vw;
 }
 select {
-  font-size: 15px;
   flex: 1;
   padding: 0 0.5em;
   color: #000;
@@ -96,10 +113,9 @@ select {
   content: "\25BC";
   position: absolute;
   top: 0;
-  right: 0;
-  font-size: 15px;
-  vertical-align: top;
-  background: #555;
+  right: 1vh;
+  font-size: 2vh;
+  transform: translateY(-25%);
   cursor: pointer;
   pointer-events: none;
   -webkit-transition: 0.25s all ease;
@@ -107,6 +123,6 @@ select {
   transition: 0.25s all ease;
 }
 /* Transition */
-.select:hover::after {
-  color: #ddd;
+.select:hover::after{
+  color: #fff;
 }

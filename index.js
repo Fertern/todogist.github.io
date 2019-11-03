@@ -65,22 +65,22 @@ function searchAll() {
     priority = searchPriority.value,
     priorityCards,
     statusCards;
-  if (status === "all" && priority === "all") {
+  if (status === "All" && priority === "All") {
     searchCards = allCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
     );
-  } else if (status === "all" && priority !== "all") {
+  } else if (status === "All" && priority !== "All") {
     priorityCards = allCards.filter(item => item.priority === priority);
     searchCards = priorityCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
     );
-  } else if (status === "open" && priority !== "all") {
+  } else if (status === "open" && priority !== "All") {
     statusCards = allCards.filter(item => item.isDone === false);
     priorityCards = statusCards.filter(item => item.priority === priority);
     searchCards = priorityCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())
     );
-  } else if (status === "done" && priority !== "all") {
+  } else if (status === "done" && priority !== "All") {
     statusCards = allCards.filter(item => item.isDone === true);
     priorityCards = statusCards.filter(item => item.priority === priority);
     searchCards = priorityCards.filter(item =>
@@ -109,18 +109,20 @@ function renderCards(props) {
   <div class='card__text'>
     <div id='${"card__title" + props.id}' class='card__title'>
     ${props.title}</div>
-    <input value='${props.title}' type="text" 
+    <input value='${props.title}' maxlength="30"
     id="${"edited-title" + props.id}" class='edited-title hide'/>
     <div id='${"card__description" + props.id}' class='card__description'>
     ${props.description}</div>
-    <input value='${props.description}' type="text" 
-    id="${"edited-description" + props.id}" class='edited-description hide'/>
+    <textarea value='${
+      props.description
+    }' maxlength="150" id="${"edited-description" +
+    props.id}" class='edited-description hide'>${props.description}</textarea>
   </div>
   <div class='card__down'>
     <span id='${"card__priority" + props.id}' class='card__priority'>
     ${props.priority}</span>
-    <div class="edit-select">
-      <select id='${"edited-priority" + props.id}' 
+    <div class="edit-select select">
+      <select id='${"edited-priority" + props.id}'
         class="edited-priority hide" >
         <option selected value="High">High</option>
         <option value="Normal">Normal</option>
@@ -130,9 +132,9 @@ function renderCards(props) {
     <span id='${"card__edit" + props.id}'  class='card__edit'>
       <div class='extra-img'>...</div>
       <div class='extra-menu'>
-        <button class='extra-menu__edit'>edit</button>
-        <button class='extra-menu__done'>done</button>
-        <button class='extra-menu__delete'>delete</button> 
+        <button class='extra-menu__done'>Done</button>
+        <button class='extra-menu__edit'>Edit</button>
+        <button class='extra-menu__delete'>Delete</button>
           </div>
     </span>
     <span id='${"ok" + props.id}' class='ok'>OK</span>
@@ -252,7 +254,7 @@ function doneCard(e) {
 
 function deleteCard(e) {
   let listIndex = findIndex(retrieveId(e, "article"), allCards);
-  console.log(allCards.findIndex(item => item.id === "f77"));
+  console.log(allCards[listIndex]);
   allCards[listIndex].deleteInfo(allCards);
   e.target.closest("article").remove();
 }

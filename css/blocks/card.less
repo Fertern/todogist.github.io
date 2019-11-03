@@ -1,31 +1,73 @@
 // main: ../index.less
-
+*{
+  transition: 0.25s;
+}
 .card__wrapper {
-  border: 3px solid black;
+  border: 0.1vw solid black;
   position: relative;
-  display: inline-block;
-  padding: 15px;
-  padding-bottom: 30px;
-  min-width: 300px;
-  max-width: 300px;
-  margin: 10px 50px;
+  display: inline-flex;
+  padding: 1vw 1vw 5.3vw 1vw;
+  min-height: 15vw;
+  width: 15vw;
+  margin: 0.5vw;
+  text-align: left;
+  border-radius: 1vw;
+  z-index: 2;
+  background: #fff;
+}
+.card__wrapper:hover{
+  box-shadow: 0 0 0.5vw 0 rgba(0,0,0,0.5);
+  transform: translateY(-0.1vw);
 }
 .card__wrapper.open {
   background-color: bisque;
 }
-.card__text {
-  margin-bottom: 40px;
+.card__wrapper.open::before{
+  content: "\2714";
+  position: absolute;
+  top: 1vw;
+  right: 1vw;
+  width: 2vw;
+  height: 2vw;
+  background: #0ede1f;
+  border: none;
+  font-size: 1.25vw;
+  border-radius: 1vw;
+  color: #fff;
+  text-align: center;
 }
-.card__title {
-  margin-bottom: 40px;
+.card__title{
+  font-weight: bold;
 }
-.card__description {
-  min-height: 60px;
-  max-width: 350px;
+.card__description,.card__title{
+  min-height: 3.125vw;
+  max-width: 13vw;
 }
-
+.edit-select{
+  min-height: 3.125vw!important;
+  width: fit-content!important;
+  border-radius: 1vw!important;
+}.edit-select::after{
+  display: none;
+}
+.edited-priority{
+  font-size: 1.5vw!important;
+}
+.edited-title, .edited-description{
+  background: transparent;
+  border: none;
+  border-bottom: 0.05vw #000 solid;
+  font-size: 1vw;
+  min-height: 2.125vw;
+  margin: 0.5vw 0;
+  width: 100%;
+}
+.edited-description{
+  height: fit-content;
+  resize: none;
+  height: 4vw;
+}
 .card__edit {
-  padding: 0 10px;
   text-align: center;
   position: relative;
 }
@@ -36,39 +78,56 @@
 .card__priority,
 .extra-img,
 .ok {
-  border: 3px inset black;
-  border-radius: 20px;
-  padding: 5px;
+  border: 0.1vw inset black;
+  border-radius: 1vw;
+  padding: 0.5vw;
+  cursor: pointer;
 }
-
+.extra-img{
+  min-width: 3vw;
+  height: 3vw;
+}
 .extra-menu {
   position: absolute;
   display: none;
   text-align: left;
-  z-index: 1991;
+  transform: translateX(-1.8vw);
+  cursor: context-menu;
 }
 .extra-menu > button {
-  width: 50px;
+  padding: 1vh;
+  width: 6vw;
+  font-size: 1.5vh;
   background-color: #ccc;
   outline: none;
-  border: 2px #000 solid;
+  border: 0.1vw #000 solid;
+}
+.extra-menu__edit{
+  border-top: none!important;
+  border-bottom: none!important;
+}
+.extra-menu__delete{
+  background-color: #f77!important;
+  color: #fff;
+}
+.extra-menu__delete:hover{
+  background-color: #f99!important
 }
 .extra-menu > button:hover {
   background-color: #eee;
+  cursor:context-menu;
 }
-
 .card__down {
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
+  width: (15vw-2.3);
+  margin: 1vw 0;
 }
-
-.card__title.hide,
-.card__description.hide,
-.card__priority.hide,
-.card__edit.hide,
-.edited-title.hide,
-.edited-description.hide,
-.edited-priority.hide,
+.select.hide{
+  display: none;
+}
 .ok {
   display: none;
 }

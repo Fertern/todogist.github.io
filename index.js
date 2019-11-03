@@ -254,7 +254,6 @@ function doneCard(e) {
 
 function deleteCard(e) {
   let listIndex = findIndex(retrieveId(e, "article"), allCards);
-  console.log(allCards[listIndex]);
   allCards[listIndex].deleteInfo(allCards);
   e.target.closest("article").remove();
 }

@@ -1,6 +1,6 @@
-# ToDoGist task manager app
+# ToDoList task manager app (Pure JavaScript)
 
-## For "Ciklum University: JS Band Internship"
+## Technical task for "Ciklum University: JS Band Internship"
 
 ## In this app you can:
 
@@ -11,10 +11,6 @@
   +Title
   +Status
   +Priority
-
-### Also, all progress saved into localStorage, so cards still
-
-### exist after reloading the page or browser.
 
 # by Fertern in 2019
 

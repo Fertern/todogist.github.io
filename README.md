@@ -1,4 +1,4 @@
-# ToDoList task manager app (Pure JavaScript)
+# ToDoGist task manager app (Pure JavaScript)
 
 ## Technical task for "Ciklum University: JS Band Internship"
 

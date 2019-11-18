@@ -67,7 +67,6 @@ let allCards = [],
 
 // Editing methods for card
 function editCard(e) {
-  console.log(allCards);
   let listIndex = finder.findIndex(finder.retrieveId(e, "article"), allCards),
     id = allCards[listIndex].id,
     // Set unique ID for every single card

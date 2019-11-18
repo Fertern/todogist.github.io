@@ -50,7 +50,6 @@ let allCards = [],
       } else {
         itCardInArray.isDone = true;
       }
-      allCards[listIndex].saveInfo(allCards); // save into localStorage
     },
 
     deleteCard(e) {
@@ -127,7 +126,6 @@ function saveOk(e) {
   itCard.title = info.defTitle.value;
   itCard.description = info.defDescription.value;
   itCard.priority = info.defPriority.value;
-  allCards[info.id].saveInfo(allCards); // save changes into localStorage
 }
 
 export { cardMethods, searchAll, editCard, saveOk };

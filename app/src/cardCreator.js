@@ -7,8 +7,7 @@ import {
 import Card from "./card";
 import renderCards from "./renderer";
 import finder from "./finder";
-import searchAll from "./searcher";
-import handlePageLoad from "./restorer";
+import search from "./searcher";
 
 //Array for cards
 let allCards = [],
@@ -28,77 +27,11 @@ let allCards = [],
         });
         allCards.push(newCard);
         renderCards(newCard);
-        newCard.saveInfo(allCards);
         inputTitle.value = "";
         inputDescription.value = "";
         inputTitle.classList.remove("alert");
         toggleEditMenu();
       }
-    },
-
-    editCard(e) {
-      let listIndex = finder.findIndex(
-          finder.retrieveId(e, "article"),
-          allCards
-        ),
-        id = allCards[listIndex].id,
-        // Set unique ID for every single card
-        idTitleDef = "#" + "card__title" + id,
-        idDescriptionDef = "#" + "card__description" + id,
-        idPriorityDef = "#" + "card__priority" + id,
-        idDots = "#" + "card__edit" + id,
-        // --
-        idTitle = "#" + "edited-title" + id,
-        idDescription = "#" + "edited-description" + id,
-        idPriority = "#" + "edited-priority" + id,
-        idOk = "#" + "ok" + id,
-        // --
-        editedTitle = document.querySelector(idTitle),
-        editedDescription = document.querySelector(idDescription),
-        editedPriority = document.querySelector(idPriority),
-        // --
-        defTitle = document.querySelector(idTitleDef),
-        defDescription = document.querySelector(idDescriptionDef),
-        defPriority = document.querySelector(idPriorityDef),
-        // --
-        dots = document.querySelector(idDots),
-        ok = document.querySelector(idOk);
-      ok.addEventListener("click", saveOk);
-      // Swap between 'default' and 'editing'
-      editedTitle.classList.toggle("hide");
-      editedDescription.classList.toggle("hide");
-      editedPriority.classList.toggle("hide");
-      // --
-      defTitle.classList.toggle("hide");
-      defDescription.classList.toggle("hide");
-      defPriority.classList.toggle("hide");
-      // --
-      dots.classList.toggle("hide");
-      ok.classList.toggle("hide");
-      // Export variables for using in another function
-      let arr = [
-        defTitle,
-        editedTitle,
-        defDescription,
-        editedDescription,
-        defPriority,
-        editedPriority,
-        id,
-        listIndex
-      ];
-      return arr;
-    },
-    saveOk(e) {
-      // Use array of variables from last function
-      let info = editCard(e);
-      info[0].innerHTML = info[1].value;
-      info[2].innerHTML = info[3].value;
-      info[4].innerHTML = info[5].value;
-      let itCard = allCards.find(item => item.id === info[6]);
-      itCard.title = info[1].value;
-      itCard.description = info[3].value;
-      itCard.priority = info[5].value;
-      allCards[info[7]].saveInfo(allCards); // save changes into localStorage
     },
     doneCard(e) {
       let listIndex = finder.findIndex(
@@ -125,17 +58,76 @@ let allCards = [],
         finder.retrieveId(e, "article"),
         allCards
       );
-      allCards[listIndex].deleteInfo(allCards);
       e.target.closest("article").remove();
     }
   },
   //Currying with 'allCards'
-  manager = {
-    handlePageLoad() {
-      handlePageLoad(allCards);
-    },
-    searchAll() {
-      searchAll(allCards);
-    }
+  searchAll = function() {
+    search(allCards);
   };
-export { cardMethods, manager };
+
+// Editing methods for card
+function editCard(e) {
+  console.log(allCards);
+  let listIndex = finder.findIndex(finder.retrieveId(e, "article"), allCards),
+    id = allCards[listIndex].id,
+    // Set unique ID for every single card
+    idTitleDef = "#" + "card__title" + id,
+    idDescriptionDef = "#" + "card__description" + id,
+    idPriorityDef = "#" + "card__priority" + id,
+    idDots = "#" + "card__edit" + id,
+    // --
+    idTitle = "#" + "edited-title" + id,
+    idDescription = "#" + "edited-description" + id,
+    idPriority = "#" + "edited-priority" + id,
+    idOk = "#" + "ok" + id,
+    // --
+    editedTitle = document.querySelector(idTitle),
+    editedDescription = document.querySelector(idDescription),
+    editedPriority = document.querySelector(idPriority),
+    // --
+    defTitle = document.querySelector(idTitleDef),
+    defDescription = document.querySelector(idDescriptionDef),
+    defPriority = document.querySelector(idPriorityDef),
+    // --
+    dots = document.querySelector(idDots),
+    ok = document.querySelector(idOk);
+  // Swap between 'default' and 'editing'
+  editedTitle.classList.toggle("hide");
+  editedDescription.classList.toggle("hide");
+  editedPriority.classList.toggle("hide");
+  // --
+  defTitle.classList.toggle("hide");
+  defDescription.classList.toggle("hide");
+  defPriority.classList.toggle("hide");
+  // --
+  dots.classList.toggle("hide");
+  ok.classList.toggle("hide");
+  // Export variables for using in another function
+  return {
+    defTitle,
+    editedTitle,
+    defDescription,
+    editedDescription,
+    defPriority,
+    editedPriority,
+    id,
+    listIndex,
+    ok,
+    dots
+  };
+}
+function saveOk(e) {
+  // Use array of variables from last function
+  let info = editCard(e);
+  info.defTitle.innerHTML = info.editedTitle.value;
+  info.defDescription.innerHTML = info.editedDescription.value;
+  info.defPriority.innerHTML = info.editedPriority.value;
+  let itCard = allCards.find(item => item.id === info.id);
+  itCard.title = info.defTitle.value;
+  itCard.description = info.defDescription.value;
+  itCard.priority = info.defPriority.value;
+  allCards[info.id].saveInfo(allCards); // save changes into localStorage
+}
+
+export { cardMethods, searchAll, editCard, saveOk };

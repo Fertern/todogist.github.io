@@ -1,5 +1,5 @@
 import { cardsArea } from "./index";
-import { cardMethods } from "./cardCreator";
+import { cardMethods, editCard, saveOk } from "./cardCreator";
 function renderCards(props) {
   let htmlBlock = `<article id='${props.id}'
   ${props.isDone ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
@@ -41,11 +41,13 @@ function renderCards(props) {
   // Elements of extra-menu
   let extraEdit = document.querySelector(".extra-menu__edit"),
     extraDone = document.querySelector(".extra-menu__done"),
-    extraDelete = document.querySelector(".extra-menu__delete");
+    extraDelete = document.querySelector(".extra-menu__delete"),
+    ok = document.querySelector(".ok");
   // Events for extra-menu
-  extraEdit.addEventListener("click", cardMethods.editCard);
   extraDone.addEventListener("click", cardMethods.doneCard);
   extraDelete.addEventListener("click", cardMethods.deleteCard);
+  extraEdit.addEventListener("click", editCard);
+  ok.addEventListener("click", saveOk);
 }
 
 export default renderCards;

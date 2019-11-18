@@ -1,7 +1,7 @@
 // For search target cards by search-bar
 import { searchStatus, searchPriority, inputSearch, cardsArea } from "./index";
 import renderCards from "./renderer";
-function searchAll(allCards) {
+function search(allCards) {
   let searchCards,
     status = searchStatus.value,
     priority = searchPriority.value,
@@ -41,4 +41,4 @@ function searchAll(allCards) {
   cardsArea.innerHTML = "";
   searchCards.forEach(item => renderCards(item));
 }
-export default searchAll;
+export default search;

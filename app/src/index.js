@@ -1,4 +1,4 @@
-import { cardMethods, manager } from "./cardCreator";
+import { cardMethods, searchAll } from "./cardCreator";
 // Global elements and func for export
 export const inputTitle = document.querySelector("#input-title"),
   inputDescription = document.querySelector("#input-description"),
@@ -19,10 +19,9 @@ export const inputTitle = document.querySelector("#input-title"),
 // Global events
 editMenu.addEventListener("click", editMenuButtons);
 menu.addEventListener("click", menuButtons);
-window.addEventListener("DOMContentLoaded", manager.handlePageLoad);
-searchTitle.addEventListener("input", manager.searchAll);
-searchStatus.addEventListener("change", manager.searchAll);
-searchPriority.addEventListener("change", manager.searchAll);
+searchTitle.addEventListener("input", searchAll);
+searchStatus.addEventListener("change", searchAll);
+searchPriority.addEventListener("change", searchAll);
 
 // For events
 function editMenuButtons(e) {

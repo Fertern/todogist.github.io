@@ -6,15 +6,16 @@ class Card {
     this.priority = info.priority;
     this.isDone = info.isDone;
   }
-  saveInfo(allCards) {
-    localStorage.setItem("globalStorage", JSON.stringify(allCards));
+  saveInfo(array) {
+    localStorage.setItem("globalStorage", JSON.stringify(array));
   }
-  deleteInfo(allCards) {
+  deleteInfo(array) {
     let listId = this.id;
-    let index = allCards.findIndex(function(list) {
+    let index = array.findIndex(function(list) {
       return parseInt(list.id) === listId;
     });
-    allCards.splice(index, 1);
-    this.saveInfo(allCards);
+    array.splice(index, 1);
+    this.saveInfo(array);
   }
 }
+export default Card;

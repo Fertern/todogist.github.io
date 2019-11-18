@@ -1,0 +1,25 @@
+{
+  "name": "todogist.github.io",
+  "version": "1.0.0",
+  "description": "- Make task cards with title, description and priority\r - Edit any existing card\r - Change done/undone card status\r - Sort cards by:\r   +Title\r   +Status\r   +Priority",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fertern/todogist.github.io.git"
+  },
+  "author": "Fertern",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fertern/todogist.github.io/issues"
+  },
+  "homepage": "https://github.com/Fertern/todogist.github.io#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}

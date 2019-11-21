@@ -1,4 +1,4 @@
-//For search current id
+//For find current id
 const finder = {
   retrieveId(e, location) {
     var taskId = e.target.closest(location).getAttribute("id");

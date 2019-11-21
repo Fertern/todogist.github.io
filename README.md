@@ -2,7 +2,7 @@
 
 ## Technical task for "Ciklum University: JS Band Internship"
 
-## In this app you can:
+## This app allow you to:
 
 - Make task cards with title, description and priority
 - Edit any existing card

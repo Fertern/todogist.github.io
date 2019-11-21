@@ -2,11 +2,15 @@
 import { searchStatus, searchPriority, inputSearch, cardsArea } from "./index";
 import renderCards from "./renderer";
 function search(allCards) {
+  console.log(cardsArea);
+  console.log("///////");
+  console.log(allCards);
   let searchCards,
     status = searchStatus.value,
     priority = searchPriority.value,
     priorityCards,
     statusCards;
+
   if (status === "All" && priority === "All") {
     searchCards = allCards.filter(item =>
       item.title.toLowerCase().includes(inputSearch.value.toLowerCase())

@@ -118,13 +118,17 @@ function editCard(e) {
 function saveOk(e) {
   // Use array of variables from last function
   let info = editCard(e);
+  if (info.editedTitle.value == "") {
+    info.editedTitle.value = "Untitled task";
+  }
   info.defTitle.innerHTML = info.editedTitle.value;
   info.defDescription.innerHTML = info.editedDescription.value;
   info.defPriority.innerHTML = info.editedPriority.value;
   let itCard = allCards.find(item => item.id === info.id);
-  itCard.title = info.defTitle.value;
-  itCard.description = info.defDescription.value;
-  itCard.priority = info.defPriority.value;
+  // ATTENTION
+  itCard.title = info.editedTitle.value;
+  itCard.description = info.editedDescription.value;
+  itCard.priority = info.editedPriority.value;
 }
 
 export { cardMethods, searchAll, editCard, saveOk };

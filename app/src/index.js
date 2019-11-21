@@ -1,4 +1,5 @@
 import { cardMethods, searchAll } from "./cardCreator";
+import "./css/index.less";
 // Global elements and func for export
 export const inputTitle = document.querySelector("#input-title"),
   inputDescription = document.querySelector("#input-description"),

@@ -2,7 +2,7 @@ import { cardsArea } from "./index";
 import { cardMethods, editCard, saveOk } from "./cardCreator";
 function renderCards(props) {
   let htmlBlock = `<article id='${props.id}'
-  ${props.isDone ? 'class="card__wrapper open"' : "class='card__wrapper'"} >
+  ${props.isDone ? 'class="card__wrapper done"' : "class='card__wrapper'"} >
   <div class='card__text'>
     <div id='${"card__title" + props.id}' class='card__title'>
     ${props.title}</div>
@@ -16,8 +16,9 @@ function renderCards(props) {
     props.id}" class='edited-description hide'>${props.description}</textarea>
   </div>
   <div class='card__down'>
-    <span id='${"card__priority" + props.id}' class='card__priority'>
-    ${props.priority}</span>
+    <span id='${"card__priority" + props.id}' class='card__priority'>${
+    props.priority
+  }</span>
     <div class="edit-select select">
       <select id='${"edited-priority" + props.id}'
         class="edited-priority hide" >

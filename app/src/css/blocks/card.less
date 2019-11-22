@@ -1,5 +1,5 @@
 // main: ../index.less
-*{
+* {
   transition: 0.25s;
 }
 .card__wrapper {
@@ -15,14 +15,14 @@
   z-index: 2;
   background: #fff;
 }
-.card__wrapper:hover{
-  box-shadow: 0 0 0.5vw 0 rgba(0,0,0,0.5);
+.card__wrapper:hover {
+  box-shadow: 0 0 0.5vw 0 rgba(0, 0, 0, 0.5);
   transform: translateY(-0.1vw);
 }
-.card__wrapper.open {
+.card__wrapper.done {
   background-color: bisque;
 }
-.card__wrapper.open::before{
+.card__wrapper.done::before {
   content: "\2714";
   position: absolute;
   top: 1vw;
@@ -36,24 +36,30 @@
   color: #fff;
   text-align: center;
 }
-.card__title{
+.card__wrapper.hide {
+  display: none;
+}
+.card__title {
   font-weight: bold;
 }
-.card__description,.card__title{
+.card__description,
+.card__title {
   min-height: 3.125vw;
   max-width: 13vw;
 }
-.edit-select{
-  min-height: 3.125vw!important;
-  width: fit-content!important;
-  border-radius: 1vw!important;
-}.edit-select::after{
+.edit-select {
+  min-height: 3.125vw !important;
+  width: fit-content !important;
+  border-radius: 1vw !important;
+}
+.edit-select::after {
   display: none;
 }
-.edited-priority{
-  font-size: 1.5vw!important;
+.edited-priority {
+  font-size: 1.5vw !important;
 }
-.edited-title, .edited-description{
+.edited-title,
+.edited-description {
   background: transparent;
   border: none;
   border-bottom: 0.05vw #000 solid;
@@ -62,7 +68,7 @@
   margin: 0.5vw 0;
   width: 100%;
 }
-.edited-description{
+.edited-description {
   height: fit-content;
   resize: none;
   height: 4vw;
@@ -83,7 +89,7 @@
   padding: 0.5vw;
   cursor: pointer;
 }
-.extra-img{
+.extra-img {
   min-width: 3vw;
   height: 3vw;
 }
@@ -102,20 +108,20 @@
   outline: none;
   border: 0.1vw #000 solid;
 }
-.extra-menu__edit{
-  border-top: none!important;
-  border-bottom: none!important;
+.extra-menu__edit {
+  border-top: none !important;
+  border-bottom: none !important;
 }
-.extra-menu__delete{
-  background-color: #f77!important;
+.extra-menu__delete {
+  background-color: #f77 !important;
   color: #fff;
 }
-.extra-menu__delete:hover{
-  background-color: #f99!important
+.extra-menu__delete:hover {
+  background-color: #f99 !important;
 }
 .extra-menu > button:hover {
   background-color: #eee;
-  cursor:context-menu;
+  cursor: context-menu;
 }
 .card__down {
   position: absolute;
@@ -125,7 +131,7 @@
   width: (15vw-2.3);
   margin: 1vw 0;
 }
-.select.hide{
+.select.hide {
   display: none;
 }
 .ok {

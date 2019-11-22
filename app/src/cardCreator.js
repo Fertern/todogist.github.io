@@ -7,7 +7,6 @@ import {
 import Card from "./card";
 import renderCards from "./renderer";
 import finder from "./finder";
-import search from "./searcher";
 
 //Array for cards
 let allCards = [],
@@ -19,7 +18,7 @@ let allCards = [],
         inputTitle.classList.add("alert");
       } else {
         let newCard = new Card({
-          id: `f${(~~(Math.random() * 1e5)).toString()}`,
+          id: `_f${(~~(Math.random() * 1e5)).toString()}`,
           title: inputTitle.value,
           description: inputDescription.value,
           priority: inputPriority.value,
@@ -44,25 +43,16 @@ let allCards = [],
         itCardInArray = allCards.find(
           item => item.id === allCards[listIndex].id
         );
-      itCard.classList.toggle("open");
+      itCard.classList.toggle("done");
       if (itCardInArray.isDone) {
         itCardInArray.isDone = false;
       } else {
         itCardInArray.isDone = true;
       }
     },
-
     deleteCard(e) {
-      let listIndex = finder.findIndex(
-        finder.retrieveId(e, "article"),
-        allCards
-      );
       e.target.closest("article").remove();
     }
-  },
-  //Currying with 'allCards'
-  searchAll = function() {
-    search(allCards);
   };
 
 // Editing methods for card
@@ -131,4 +121,4 @@ function saveOk(e) {
   itCard.priority = info.editedPriority.value;
 }
 
-export { cardMethods, searchAll, editCard, saveOk };
+export { cardMethods, editCard, saveOk };

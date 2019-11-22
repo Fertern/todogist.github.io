@@ -12,6 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/Fertern/todogist.github.io.git"
   },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
   "author": "Fertern",
   "license": "ISC",
   "bugs": {

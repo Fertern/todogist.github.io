@@ -8,19 +8,19 @@
 - Edit any existing card
 - Change done/undone card status
 - Sort cards by:
-  +Title
-  +Status
-  +Priority
+  - Title
+  - Status
+  - Priority
 - Cross-browser
 
 ## Used technologies:
 
 - Native JavaScript
 - Webpack
-  +Autoprefixer
-  +Babel
-  +MiniCss Extract Plugin
-  +OptimizeCSS Assets Plugin
+  - Autoprefixer
+  - Babel
+  - MiniCss Extract Plugin
+  - OptimizeCSS Assets Plugin
 - Less
 - PostCSS
 

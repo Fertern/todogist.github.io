@@ -2,7 +2,7 @@
 
 ## Technical task for "Ciklum University: JS Band Internship"
 
-## This app allow you to:
+## Features:
 
 - Make task cards with title, description and priority
 - Edit any existing card
@@ -11,6 +11,17 @@
   +Title
   +Status
   +Priority
+- Cross-browser
+  
+## Used technologies:
+- Native JacaScript
+- Webpack
+  +Autoprefixer
+  +Babel
+  +MiniCss Extract Plugin
+  +OptimizeCSS Assets Plugin
+- Less
+- PostCSS
 
 # by Fertern in 2019
 
